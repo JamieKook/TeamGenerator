@@ -4,6 +4,7 @@ const Intern = require( "./lib/Intern");
 const Html = require("./templates/team"); 
 const cardHtml= require("./templates/card"); 
 const Inquirer = require("inquirer");
+const fs= require("fs"); 
  
 
 const questionFilter= { "Manager": "office number",
@@ -11,6 +12,8 @@ const questionFilter= { "Manager": "office number",
                         "Intern": "school's name"}; 
 
 let type= null; 
+let htmlGathered= '';
+let isDone=false;  
 
 function askUserInput(){
     if (type= null){
@@ -54,13 +57,13 @@ function askUserInput(){
                 ])
             } else {
                 console.log("\n\nThank you for entering your team information \n\n Your summary will be generated shortly."); 
-                return "done"
+                const completeHtml= Html.templateHtml(htmlGathered); 
+                isDone= true; 
+                return completeHtml; 
             }
         })
         .then(function(data){
-            if (data !== "done"){
-                // let employee= type + data[type+"Name"];
-                // console.log(employee);
+            if (!isDone) {
                 let employee= null;   
                 let htmlData= null; 
                 switch(type) {
@@ -80,10 +83,20 @@ function askUserInput(){
                         console.log("Something went wrong"); 
                         break; 
                 }
-                console.log(htmlData); 
+                console.log(htmlData);
+                htmlGathered += htmlData;
+                console.log(htmlGathered);  
                 askUserInput();
+            } else {
+                fs.writeFile("./output/teamsummary.html", data, (err) =>{
+                    if (err) {
+                        console.log(err); 
+                    } else {
+                        console.log("The file has been saved!"); 
+                    }
+                });
             }
-        })
+        }); 
 }
 
 askUserInput(); 
