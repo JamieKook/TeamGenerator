@@ -1,7 +1,10 @@
 const Manager = require( "./lib/Manager");
 const Engineer = require( "./lib/Engineer"); 
 const Intern = require( "./lib/Intern"); 
-const Inquirer = require("inquirer"); 
+const Html = require("./templates/team"); 
+const cardHtml= require("./templates/card"); 
+const Inquirer = require("inquirer");
+ 
 
 const questionFilter= { "Manager": "office number",
                         "Engineer": "Github username",
@@ -59,21 +62,25 @@ function askUserInput(){
                 // let employee= type + data[type+"Name"];
                 // console.log(employee);
                 let employee= null;   
+                let htmlData= null; 
                 switch(type) {
                     case "Manager": 
                         employee = new Manager(data.Name, data.Id, data.Email, data.Special); 
+                        htmlData= cardHtml.generateCardHtml(employee.name, type, employee.id, employee.email, employee.officeNumber); 
                         break; 
                     case "Engineer": 
                         employee = new Engineer(data.Name, data.Id, data.Email, data.Special); 
+                        htmlData= cardHtml.generateCardHtml(employee.name, type, employee.id, employee.email, employee.github); 
                         break; 
                     case "Intern": 
                         employee = new Intern(data.Name, data.Id, data.Email, data.Special); 
+                        htmlData= cardHtml.generateCardHtml(employee.name, type, employee.id, employee.email, employee.school); 
                         break; 
                     default: 
                         console.log("Something went wrong"); 
                         break; 
                 }
-                console.log(employee); 
+                console.log(htmlData); 
                 askUserInput();
             }
         })
