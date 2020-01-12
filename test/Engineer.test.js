@@ -17,3 +17,21 @@ test("Can get GitHub username via getGithub()", () => {
   const e = new Engineer("Foo", 1, "test@test.com", testValue);
   expect(e.getGithub()).toBe(testValue);
 });
+
+test ("Should return true for isValid if github is string", () =>{
+  const github= "JamieKook12"; 
+  const e = new Engineer("Foo", 1, "test@test.com", github);
+  expect(e.isValid).toBe(true); 
+}); 
+
+test ("Should return false for isValid if github is undefined", () =>{
+    const github= undefined; 
+    const e = new Engineer("Foo", 1, "test@test.com", github);
+    expect(e.isValid).toBe(false); 
+}); 
+
+test ("Should return false for isValid if github is empty string", () =>{
+  const github= ""; 
+  const e = new Engineer("Foo", 1, "test@test.com", github);
+  expect(e.isValid).toBe(false); 
+}); 

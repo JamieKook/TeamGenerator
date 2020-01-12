@@ -18,3 +18,23 @@ test("Can get office number via getOffice()", () => {
   const e = new Manager("Foo", 1, "test@test.com", testValue);
   expect(e.getOfficeNumber()).toBe(testValue);
 });
+
+describe("Office Number validation", () => {
+  it("Should return true for isValid if OfficeNumber is a number", () => {
+    const OfficeNumber=13; 
+    const e = new Manager("Foo", 1, "test@test.com", OfficeNumber);
+  expect(e.isValid).toBe(true); 
+  });
+
+  it("Should return false for isValid if OfficeNumber is a not a number", () => {
+    const OfficeNumber="ten"; 
+    const e = new Manager("Foo", 1, "test@test.com", OfficeNumber);
+  expect(e.isValid).toBe(false); 
+  });
+
+  it("Should return false for isValid if OfficeNumber is a not an empty string", () => {
+    const OfficeNumber=""; 
+    const e = new Manager("Foo", 1, "test@test.com", OfficeNumber);
+  expect(e.isValid).toBe(false); 
+  });
+}); 
