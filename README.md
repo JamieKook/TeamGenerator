@@ -1,7 +1,7 @@
 # Team Summary Generator
 This Command line Interface application returns a html page displaying a information about each team member. 
 
-![image of summary](TeamSumary.png)
+![image of summary](TeamSummary.png)
 
 ## Installation
 
