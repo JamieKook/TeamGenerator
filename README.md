@@ -1,8 +1,7 @@
-# Note Taker App
+# Team Summary Generator
+This Command line Interface application returns a html page displaying a information about each team member. 
 
-This web application saves notes onto a server for users to view and edit whenever they would like. 
-
-![image of note taker](notetaker.png)
+![image of summary](TeamSumary.png)
 
 ## Installation
 
